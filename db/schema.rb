@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151126223735) do
+ActiveRecord::Schema.define(version: 20151126225547) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "gifts", force: :cascade do |t|
+    t.string   "name"
+    t.decimal  "price"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "gifts", ["user_id"], name: "index_gifts_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
@@ -25,4 +36,5 @@ ActiveRecord::Schema.define(version: 20151126223735) do
     t.integer  "role"
   end
 
+  add_foreign_key "gifts", "users"
 end

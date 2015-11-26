@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @gift.name
+%p
+  %b Price:
+  = @gift.price
+%p
+  %b Description:
+  = @gift.description
+%p
+  %b User:
+  = @gift.user
+
+= link_to 'Edit', edit_gift_path(@gift)
+\|
+= link_to 'Back', gifts_path

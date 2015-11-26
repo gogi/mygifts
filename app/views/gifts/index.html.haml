@@ -1,0 +1,27 @@
+%h1 Listing gifts
+
+%table
+  %thead
+    %tr
+      %th Name
+      %th Price
+      %th Description
+      %th User
+      %th
+      %th
+      %th
+
+  %tbody
+    - @gifts.each do |gift|
+      %tr
+        %td= gift.name
+        %td= gift.price
+        %td= gift.description
+        %td= gift.user
+        %td= link_to 'Show', gift
+        %td= link_to 'Edit', edit_gift_path(gift)
+        %td= link_to 'Destroy', gift, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Gift', new_gift_path
