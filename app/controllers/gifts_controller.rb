@@ -1,8 +1,7 @@
 class GiftsController < ApplicationController
-  before_action :set_gift, only: [:show, :edit, :update, :destroy]
-
   expose(:gift, attributes: :gift_params)
   expose(:gifts) { current_user.gifts }
+  expose(:user) { current_user }
 
   # GET /gifts
   # GET /gifts.json
