@@ -16,7 +16,7 @@ class GiftsController < ApplicationController
   end
 
   def create
-    gift.user = current_user
+    gift.users << current_user
     if gift.save
       redirect_to gift, notice: 'Gift was successfully created.'
     else
