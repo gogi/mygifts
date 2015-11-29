@@ -9,9 +9,9 @@
             - gifts_slice.each do |gift|
                 .col-md-4.portfolio-item
                     %a{ href: "#"}
-                        %img.img-responsive{:alt => "", :src => "http://placehold.it/700x400"}
+                        %img.img-responsive{:alt => "", :src => "#{gift.image}"}
                     %h3
-                        %a{ href: "#"}= gift.name
+                        =link_to gift.name, gift_path(gift)
                     %p= "#{gift.price} pln"
                     %p= gift.description
     %hr
