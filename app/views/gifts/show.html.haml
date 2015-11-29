@@ -1,18 +1,17 @@
 %p#notice= notice
 
+%a{ href: "#"}
+  %img.img-responsive{:alt => "", :src => "#{gift.image}"}
 %p
   %b Name:
-  = @gift.name
+  = gift.name
 %p
   %b Price:
-  = @gift.price
+  = gift.price
 %p
   %b Description:
-  = @gift.description
-%p
-  %b User:
-  = @gift.user
+  = gift.description
 
-= link_to 'Edit', edit_gift_path(@gift)
+= link_to 'Edit', edit_gift_path(gift)
 \|
 = link_to 'Back', gifts_path
