@@ -1,10 +1,12 @@
 class GiftsController < ApplicationController
   before_action :set_gift, only: [:show, :edit, :update, :destroy]
 
+  expose(:gift, attributes: :gift_params)
+  expose(:gifts) { current_user.gifts }
+
   # GET /gifts
   # GET /gifts.json
   def index
-    @gifts = Gift.all
   end
 
   # GET /gifts/1
@@ -14,7 +16,6 @@ class GiftsController < ApplicationController
 
   # GET /gifts/new
   def new
-    @gift = Gift.new
   end
 
   # GET /gifts/1/edit
@@ -24,15 +25,14 @@ class GiftsController < ApplicationController
   # POST /gifts
   # POST /gifts.json
   def create
-    @gift = Gift.new(gift_params)
-
+    gift.user = current_user
     respond_to do |format|
-      if @gift.save
-        format.html { redirect_to @gift, notice: 'Gift was successfully created.' }
-        format.json { render :show, status: :created, location: @gift }
+      if gift.save
+        format.html { redirect_to gift, notice: 'Gift was successfully created.' }
+        format.json { render :show, status: :created, location: gift }
       else
         format.html { render :new }
-        format.json { render json: @gift.errors, status: :unprocessable_entity }
+        format.json { render json: gift.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -41,12 +41,12 @@ class GiftsController < ApplicationController
   # PATCH/PUT /gifts/1.json
   def update
     respond_to do |format|
-      if @gift.update(gift_params)
-        format.html { redirect_to @gift, notice: 'Gift was successfully updated.' }
-        format.json { render :show, status: :ok, location: @gift }
+      if gift.update(gift_params)
+        format.html { redirect_to gift, notice: 'Gift was successfully updated.' }
+        format.json { render :show, status: :ok, location: gift }
       else
         format.html { render :edit }
-        format.json { render json: @gift.errors, status: :unprocessable_entity }
+        format.json { render json: gift.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -54,7 +54,6 @@ class GiftsController < ApplicationController
   # DELETE /gifts/1
   # DELETE /gifts/1.json
   def destroy
-    @gift.destroy
     respond_to do |format|
       format.html { redirect_to gifts_url, notice: 'Gift was successfully destroyed.' }
       format.json { head :no_content }
@@ -62,11 +61,6 @@ class GiftsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_gift
-      @gift = Gift.find(params[:id])
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def gift_params
       params.require(:gift).permit(:name, :price, :description, :user_id)
