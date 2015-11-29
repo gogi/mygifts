@@ -1,0 +1,41 @@
+.container
+    .row
+        .col-lg-12
+            %h1
+                .page-header Your Gifts
+                %small Secondary Text
+    - gifts.each_slice(3) do |gifts_slice|
+        .row
+            - gifts_slice.each do |gift|
+                .col-md-4.portfolio-item
+                    %a{ href: "#"}
+                        %img.img-responsive{:alt => "", :src => "http://placehold.it/700x400"}
+                    %h3
+                        %a{ href: "#"}= gift.name
+                    %p= "#{gift.price} pln"
+                    %p= gift.description
+    %hr
+
+    .row.text-center
+        .col-lg-12
+            %ul.pagination
+                %li
+                    %a{ href: "#"} &laquo;
+                %li.active
+                    %a{ href: "#"}1
+                %li
+                    %a{ href: "#"}2
+                %li
+                    %a{ href: "#"}3
+                %li
+                    %a{ href: "#"}4
+                %li
+                    %a{ href: "#"}5
+                %li
+                    %a{ href: "#"} &raquo;
+    %hr
+
+    %footer
+        .row
+            .col-lg-12
+                %p Copyright &copy; MyGifts 2015
